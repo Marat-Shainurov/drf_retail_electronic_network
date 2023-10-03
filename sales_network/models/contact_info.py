@@ -8,3 +8,10 @@ class ContactInfo(models.Model):
     city = models.CharField(max_length=100, verbose_name='entity_city')
     street = models.CharField(max_length=100, verbose_name='entity_street')
     building = models.IntegerField(verbose_name='entity_building_number')
+
+    def __str__(self):
+        return f'{self.email}, {self.phone}'
+
+    class Meta:
+        verbose_name = 'Contact Information'
+        verbose_name_plural = 'Contact Information'

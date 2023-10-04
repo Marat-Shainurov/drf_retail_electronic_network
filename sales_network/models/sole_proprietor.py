@@ -2,12 +2,13 @@ from django.db import models
 from rest_framework.exceptions import ValidationError
 
 from products.models import Product
-from sales_network.models import ContactInfo, Factory, RetailNetwork
+from sales_network.models import ContactInfo, Factory, RetailNetwork, MainNetwork
 
 NULLABLE = {'blank': True, 'null': True}
 
 
 class SoleProprietor(models.Model):
+    main_network = models.ForeignKey(MainNetwork, verbose_name='main_network', on_delete=models.CASCADE)
     name = models.CharField(max_length=100, unique=True, verbose_name='proprietor_name')
     contact_info = models.OneToOneField(ContactInfo, on_delete=models.CASCADE, related_name='proprietor_contacts')
     products = models.ManyToManyField(Product, related_name='proprietor_products', blank=True)

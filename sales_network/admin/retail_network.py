@@ -8,7 +8,7 @@ from sales_network.services.filter_by_city import ContactInfoCityFilter
 @admin.register(RetailNetwork)
 class RetailNetworkAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'name', 'contact_info', 'factory_supplier', 'debt_to_supplier', 'created_at', 'is_active'
+        'id', 'name', 'main_network', 'factory_supplier', 'debt_to_supplier', 'contact_info', 'created_at', 'is_active'
     )
     list_filter = ('factory_supplier', ContactInfoCityFilter, 'is_active',)
     search_fields = ('name',)

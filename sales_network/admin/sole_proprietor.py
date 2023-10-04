@@ -7,7 +7,7 @@ from sales_network.services.filter_by_city import ContactInfoCityFilter
 
 @admin.register(SoleProprietor)
 class SoleProprietorAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'contact_info', 'factory_supplier', 'retail_network_supplier',
+    list_display = ('id', 'name', 'main_network', 'factory_supplier', 'retail_network_supplier', 'contact_info',
                     'debt_to_supplier', 'created_at', 'is_active',)
     list_filter = ('factory_supplier', 'retail_network_supplier', ContactInfoCityFilter, 'is_active',)
     search_fields = ('name',)

@@ -12,7 +12,7 @@ class RetailNetwork(models.Model):
     products = models.ManyToManyField(Product, related_name='network_products', blank=True)
     factory_supplier = models.ForeignKey(Factory, on_delete=models.SET_NULL,
                                          verbose_name='supplier', related_name='supplier', **NULLABLE)
-    debt_to_supplier = models.DecimalField(verbose_name='debt_to_supplier', decimal_places=2, max_digits=15, **NULLABLE)
+    debt_to_supplier = models.DecimalField(verbose_name='debt_to_supplier', decimal_places=2, max_digits=15, default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
 

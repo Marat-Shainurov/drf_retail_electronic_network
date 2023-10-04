@@ -10,7 +10,7 @@ class ContactInfo(models.Model):
     building = models.IntegerField(verbose_name='entity_building_number')
 
     def __str__(self):
-        return f'{self.email}, {self.phone}'
+        return f'{self.email}'
 
     class Meta:
         verbose_name = 'Contact Information'

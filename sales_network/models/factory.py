@@ -12,7 +12,7 @@ class Factory(models.Model):
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return f'{self.name} factory'
+        return f'"{self.name}" factory'
 
     class Meta:
         verbose_name = 'Factory'

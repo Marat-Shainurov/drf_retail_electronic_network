@@ -1,4 +1,5 @@
 from django.db import models
+from rest_framework.exceptions import ValidationError
 
 from products.models import Product
 from sales_network.models import ContactInfo, Factory, RetailNetwork
@@ -21,8 +22,17 @@ class SoleProprietor(models.Model):
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return f'{self.name}'
+        return f'"{self.name}" proprietor'
 
     class Meta:
         verbose_name = 'Sole Proprietor'
         verbose_name_plural = 'Sole Proprietors'
+
+    def clean(self):
+        if self.factory_supplier and self.retail_network_supplier:
+            msg = "Sole Proprietor can have only one supplier (either factory_supplier or retail_network_supplier)."
+            raise ValidationError(msg)
+
+    def save(self, *args, **kwargs):
+        self.clean()
+        super().save(*args, **kwargs)

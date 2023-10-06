@@ -1,21 +1,29 @@
-from django.db import transaction
+from django.db import transaction, IntegrityError
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from rest_framework import serializers
 from rest_framework.serializers import ValidationError
 
 from products.models import Product
+from products.serializers import ProductBaseSerializer, ProductCreateSerializer
 from sales_network.models import Factory, ContactInfo
-from sales_network.serializers import ProductBaseSerializer, ContactInfoBaseSerializer, ProductCreateSerializer
+from sales_network.serializers import ContactInfoBaseSerializer, MainNetworkBaseSerializer
 
 
 class FactorySerializer(serializers.ModelSerializer):
-    contact_info = ContactInfoBaseSerializer(many=False, read_only=True)
+    main_network = MainNetworkBaseSerializer(read_only=True)
+    contact_info = ContactInfoBaseSerializer(read_only=True)
     products = ProductBaseSerializer(many=True, read_only=True)
 
     class Meta:
         model = Factory
-        fields = ('id', 'name', 'contact_info', 'products', 'created_at', 'is_active')
+        fields = ('id', 'main_network', 'name', 'contact_info', 'products', 'created_at', 'is_active')
+
+
+class FactorySupplierSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Factory
+        fields = ('id', 'name',)
 
 
 class FactoryCreateSerializer(serializers.ModelSerializer):
@@ -93,5 +101,9 @@ class FactoryUpdateSerializer(serializers.ModelSerializer):
             for attr, val in validated_data.items():
                 setattr(factory, attr, val)
 
-            factory.save()
+            try:
+                factory.save()
+            except IntegrityError:
+                raise serializers.ValidationError(
+                    f'ContactInfo with "{contact_info_data}" id is already related to another entity.')
             return factory

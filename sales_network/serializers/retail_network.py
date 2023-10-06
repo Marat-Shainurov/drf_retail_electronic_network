@@ -1,18 +1,30 @@
-from django.db import transaction
+from django.db import transaction, IntegrityError
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from rest_framework import serializers
 
 from products.models import Product
+from products.serializers import ProductCreateSerializer
 from sales_network.models import RetailNetwork, ContactInfo
-from sales_network.serializers import ProductCreateSerializer, ContactInfoBaseSerializer
+from sales_network.serializers import ContactInfoBaseSerializer, MainNetworkBaseSerializer, \
+    FactorySupplierSerializer
 
 
 class RetailNetSerializer(serializers.ModelSerializer):
+    main_network = MainNetworkBaseSerializer(read_only=True)
+    contact_info = ContactInfoBaseSerializer(read_only=True)
+    factory_supplier = FactorySupplierSerializer(read_only=True)
+
     class Meta:
         model = RetailNetwork
         fields = ('id', 'main_network', 'name', 'contact_info', 'products', 'factory_supplier', 'debt_to_supplier',
                   'created_at', 'is_active')
+
+
+class RetailNetSupplierSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RetailNetwork
+        fields = ('id', 'name',)
 
 
 class RetailNetCreateSerializer(serializers.ModelSerializer):
@@ -80,7 +92,8 @@ class RetailNetUpdateSerializer(serializers.ModelSerializer):
                 try:
                     prod_to_remove = get_object_or_404(Product, pk=product_id)
                     if prod_to_remove not in retail_network.products.all():
-                        raise serializers.ValidationError(f"The {product_id} product is not related to {retail_network}")
+                        raise serializers.ValidationError(
+                            f"The {product_id} product is not related to {retail_network}")
                     retail_network.products.remove(prod_to_remove)
                 except Http404:
                     raise serializers.ValidationError(f'Product with "{product_id}" id not found')
@@ -88,5 +101,9 @@ class RetailNetUpdateSerializer(serializers.ModelSerializer):
             for attr, val in validated_data.items():
                 setattr(retail_network, attr, val)
 
-            retail_network.save()
+            try:
+                retail_network.save()
+            except IntegrityError:
+                raise serializers.ValidationError(
+                    f'ContactInfo with "{contact_info_data}" id is already related to another entity.')
             return retail_network

@@ -33,5 +33,3 @@ urlpatterns = [
     path("sole-proprietors/get/<int:pk>/", SoleProprietorRetrieveView.as_view(), name='get_sole_proprietor'),
     path("sole-proprietors/delete/<int:pk>/", SoleProprietorDeleteView.as_view(), name='delete_sole_proprietor'),
 ]
-
-# todo: finish all the endpoints

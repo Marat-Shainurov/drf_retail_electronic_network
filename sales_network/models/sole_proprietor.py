@@ -16,8 +16,8 @@ class SoleProprietor(models.Model):
                                          verbose_name='factory_supplier',
                                          related_name='factory_supplier', **NULLABLE)
     retail_network_supplier = models.ForeignKey(RetailNetwork, on_delete=models.SET_NULL,
-                                                verbose_name='retail_net_supplier',
-                                                related_name='retail_net_supplier', **NULLABLE)
+                                                verbose_name='retail_network_supplier',
+                                                related_name='retail_network_supplier', **NULLABLE)
     debt_to_supplier = models.DecimalField(verbose_name='debt_to_supplier', decimal_places=2, max_digits=15, default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)

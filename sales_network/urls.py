@@ -4,7 +4,8 @@ from sales_network.apps import SalesNetworkConfig
 from sales_network.views import (FactoryListAPIView, FactoryCreateAPIView, FactoryUpdateAPIView, FactoryRetrieveAPIView,
                                  FactoryDeleteAPIView, RetailNetCreateAPIView, RetailNetListAPIView,
                                  RetailNetRetrieveAPIView, RetailNetDeleteAPIView, RetailNetUpdateAPIView,
-                                 SoleProprietorCreateView, SoleProprietorListView)
+                                 SoleProprietorCreateView, SoleProprietorListView, SoleProprietorUpdateView,
+                                 SoleProprietorRetrieveView, SoleProprietorDeleteView)
 
 app_name = SalesNetworkConfig.name
 
@@ -20,17 +21,17 @@ urlpatterns = [
     path("retail-networks/", RetailNetListAPIView.as_view(), name='list_retail_networks'),
     path("retail-networks/create/", RetailNetCreateAPIView.as_view(),
          name='create_retail_network'),
-    path("retail-networks/update/<int:pk>", RetailNetUpdateAPIView.as_view(), name='update_retail_network'),
-    path("retail-networks/get/<int:pk>", RetailNetRetrieveAPIView.as_view(),
+    path("retail-networks/update/<int:pk>/", RetailNetUpdateAPIView.as_view(), name='update_retail_network'),
+    path("retail-networks/get/<int:pk>/", RetailNetRetrieveAPIView.as_view(),
          name='get_retail_network'),
-    path("retail-networks/delete/<int:pk>", RetailNetDeleteAPIView.as_view(), name='delete_retail_network'),
+    path("retail-networks/delete/<int:pk>/", RetailNetDeleteAPIView.as_view(), name='delete_retail_network'),
 
     # sole-proprietor
     path("sole-proprietors/", SoleProprietorListView.as_view(), name='list_sole_proprietor'),
     path("sole-proprietors/create/", SoleProprietorCreateView.as_view(), name='create_sole_proprietor'),
-    # path("update-sole-proprietor/", RetailUpdateAPIView.as_view(), name='update_retail_network'),
-    # path("get-sole-proprietor/", RetailRetrieveAPIView.as_view(), name='get_retail_network'),
-    # path("delete-sole-proprietor/", RetailDeleteAPIView.as_view(), name='delete_retail_network'),
+    path("sole-proprietors/update/<int:pk>/", SoleProprietorUpdateView.as_view(), name='update_sole_proprietor'),
+    path("sole-proprietors/get/<int:pk>/", SoleProprietorRetrieveView.as_view(), name='get_sole_proprietor'),
+    path("sole-proprietors/delete/<int:pk>/", SoleProprietorDeleteView.as_view(), name='delete_sole_proprietor'),
 ]
 
 # todo: finish all the endpoints

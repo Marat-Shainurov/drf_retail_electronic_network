@@ -5,7 +5,7 @@ from django.contrib.auth.models import UserManager as OldUserManager
 class UserManager(OldUserManager):
     def _create_user(self, email, password, **extra_fields):
         """
-        Create and save a user with the given username, email, and password.
+        Create and save a user with the given email, and password.
         """
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)

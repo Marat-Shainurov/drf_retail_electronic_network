@@ -1,3 +1,4 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
 
 from sales_network.models import Factory
@@ -13,6 +14,8 @@ class FactoryListAPIView(generics.ListAPIView):
     serializer_class = FactorySerializer
     queryset = Factory.objects.all()
     permission_classes = [IsUserActive]
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['contact_info__city', ]
 
 
 class FactoryUpdateAPIView(generics.UpdateAPIView):

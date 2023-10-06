@@ -1,3 +1,4 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
 
 from sales_network.models import RetailNetwork
@@ -14,6 +15,8 @@ class RetailNetListAPIView(generics.ListAPIView):
     serializer_class = RetailNetSerializer
     queryset = RetailNetwork.objects.all()
     permission_classes = [IsUserActive]
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['contact_info__city', ]
 
 
 class RetailNetRetrieveAPIView(generics.RetrieveAPIView):

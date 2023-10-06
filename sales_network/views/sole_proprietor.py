@@ -1,3 +1,4 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
 
 from sales_network.models import SoleProprietor
@@ -15,6 +16,8 @@ class SoleProprietorListView(generics.ListAPIView):
     serializer_class = SoleProprietorSerializer
     queryset = SoleProprietor.objects.all()
     permission_classes = [IsUserActive]
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['contact_info__city', ]
 
 
 class SoleProprietorUpdateView(generics.UpdateAPIView):

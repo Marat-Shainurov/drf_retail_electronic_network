@@ -32,7 +32,6 @@ class UserCreationForm(forms.ModelForm):
 
 
 class UserAdmin(BaseUserAdmin):
-    # form = UserChangeForm
     add_form = UserCreationForm
 
     list_display = ('id', 'email', 'is_active', 'is_staff', 'is_superuser', 'date_joined',)

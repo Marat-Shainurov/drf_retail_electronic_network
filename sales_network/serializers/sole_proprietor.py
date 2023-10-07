@@ -6,13 +6,15 @@ from rest_framework import serializers
 from products.models import Product
 from products.serializers import ProductCreateSerializer
 from sales_network.models import SoleProprietor, ContactInfo
-from sales_network.serializers import ContactInfoBaseSerializer, FactorySupplierSerializer, RetailNetSupplierSerializer
+from sales_network.serializers import (ContactInfoBaseSerializer, FactorySupplierSerializer,
+                                       RetailNetSupplierSerializer, MainNetworkBaseSerializer)
 
 
 class SoleProprietorSerializer(serializers.ModelSerializer):
     contact_info = ContactInfoBaseSerializer(read_only=True)
     factory_supplier = FactorySupplierSerializer(read_only=True)
     retail_network_supplier = RetailNetSupplierSerializer(read_only=True)
+    main_network = MainNetworkBaseSerializer(read_only=True)
 
     class Meta:
         model = SoleProprietor
@@ -27,8 +29,9 @@ class SoleProprietorCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SoleProprietor
-        fields = ('main_network', 'name', 'contact_info', 'new_products', 'product_ids_to_add', 'factory_supplier',
-                  'retail_network_supplier',)
+        fields = (
+            'id', 'main_network', 'name', 'contact_info', 'new_products', 'product_ids_to_add', 'factory_supplier',
+            'retail_network_supplier',)
 
     def create(self, validated_data):
         with transaction.atomic():

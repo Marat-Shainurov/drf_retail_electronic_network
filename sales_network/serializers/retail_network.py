@@ -34,7 +34,8 @@ class RetailNetCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = RetailNetwork
-        fields = ('main_network', 'name', 'contact_info', 'new_products', 'product_ids_to_add', 'factory_supplier',)
+        fields = (
+            'id', 'main_network', 'name', 'contact_info', 'new_products', 'product_ids_to_add', 'factory_supplier',)
 
     def create(self, validated_data):
         with transaction.atomic():

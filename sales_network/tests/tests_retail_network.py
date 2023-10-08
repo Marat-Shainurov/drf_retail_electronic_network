@@ -82,11 +82,14 @@ class RetailNetTestCase(APITestCase):
     def test_get_retail_networks(self):
         response_get = self.client.get("http://localhost:8000/retail-networks/")
         self.assertEqual(response_get.status_code, status.HTTP_200_OK)
-        self.assertEqual(isinstance(response_get.json(), list), True)
-        self.assertEqual(len(response_get.json()), 1)
-        self.assertEqual(response_get.json()[0]['id'], self.test_retail_network.pk)
-        self.assertEqual(response_get.json()[0]['main_network']['name'], self.test_main_network.name)
-        self.assertEqual(response_get.json()[0]['factory_supplier']['name'], self.test_factory.name)
+        self.assertEqual(isinstance(response_get.json()['results'], list), True)
+        self.assertEqual(len(response_get.json()['results']), 1)
+        self.assertEqual(response_get.json()['results'][0]['id'], self.test_retail_network.pk)
+        self.assertEqual(response_get.json()['results'][0]['main_network']['name'], self.test_main_network.name)
+        self.assertEqual(response_get.json()['results'][0]['factory_supplier']['name'], self.test_factory.name)
+        self.assertEqual(response_get.json()['next'], None)
+        self.assertEqual(response_get.json()['previous'], None)
+        self.assertEqual(response_get.json()['count'], 1)
 
     def test_update_retail_network(self):
         product_data = {"name": "test product", "product_model": "test model", "launch_date": "2023-10-07"}

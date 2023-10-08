@@ -97,12 +97,16 @@ class SoleProprietorNetTestCase(APITestCase):
     def test_get_sole_proprietors(self):
         response_get = self.client.get("http://localhost:8000/sole-proprietors/")
         self.assertEqual(response_get.status_code, status.HTTP_200_OK)
-        self.assertEqual(isinstance(response_get.json(), list), True)
-        self.assertEqual(len(response_get.json()), 1)
-        self.assertEqual(response_get.json()[0]['id'], self.test_sole_proprietor.pk)
-        self.assertEqual(response_get.json()[0]['main_network']['name'], self.test_main_network.name)
-        self.assertEqual(response_get.json()[0]['factory_supplier'], None)
-        self.assertEqual(response_get.json()[0]['retail_network_supplier']['name'], self.test_retail_network.name)
+        self.assertEqual(isinstance(response_get.json()['results'], list), True)
+        self.assertEqual(len(response_get.json()['results']), 1)
+        self.assertEqual(response_get.json()['results'][0]['id'], self.test_sole_proprietor.pk)
+        self.assertEqual(response_get.json()['results'][0]['main_network']['name'], self.test_main_network.name)
+        self.assertEqual(response_get.json()['results'][0]['factory_supplier'], None)
+        self.assertEqual(response_get.json()['results'][0]['retail_network_supplier']['name'],
+                         self.test_retail_network.name)
+        self.assertEqual(response_get.json()['next'], None)
+        self.assertEqual(response_get.json()['previous'], None)
+        self.assertEqual(response_get.json()['count'], 1)
 
     def test_update_sole_proprietor(self):
         product_data = {"name": "test product", "product_model": "test model", "launch_date": "2023-10-07"}

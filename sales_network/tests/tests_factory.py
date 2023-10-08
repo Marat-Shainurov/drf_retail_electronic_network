@@ -66,9 +66,12 @@ class FactoryTestCase(APITestCase):
     def test_get_factories(self):
         response_get = self.client.get("http://localhost:8000/factories/")
         self.assertEqual(response_get.status_code, status.HTTP_200_OK)
-        self.assertEqual(isinstance(response_get.json(), list), True)
-        self.assertEqual(response_get.json()[0]['id'], self.test_factory.pk)
-        self.assertEqual(response_get.json()[0]['main_network']['name'], self.test_main_network.name)
+        self.assertEqual(isinstance(response_get.json()['results'], list), True)
+        self.assertEqual(response_get.json()['results'][0]['id'], self.test_factory.pk)
+        self.assertEqual(response_get.json()['results'][0]['main_network']['name'], self.test_main_network.name)
+        self.assertEqual(response_get.json()['next'], None)
+        self.assertEqual(response_get.json()['previous'], None)
+        self.assertEqual(response_get.json()['count'], 1)
 
     def test_update_factory(self):
         product_data = {"name": "test product", "product_model": "test model", "launch_date": "2023-10-07"}

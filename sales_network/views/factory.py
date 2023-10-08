@@ -2,6 +2,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
 
 from sales_network.models import Factory
+from sales_network.pagination import BaseNetworkPagination
 from sales_network.serializers import FactorySerializer, FactoryCreateSerializer, FactoryUpdateSerializer
 from users.permissions import IsUserActive
 
@@ -16,6 +17,7 @@ class FactoryListAPIView(generics.ListAPIView):
     permission_classes = [IsUserActive]
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['contact_info__city', ]
+    pagination_class = BaseNetworkPagination
 
 
 class FactoryUpdateAPIView(generics.UpdateAPIView):

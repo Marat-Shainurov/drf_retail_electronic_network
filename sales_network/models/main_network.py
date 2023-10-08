@@ -17,3 +17,10 @@ class MainNetwork(models.Model):
     class Meta:
         verbose_name = 'Main Network'
         verbose_name_plural = 'Main Networks'
+
+    def delete(self, *args, **kwargs):
+        self.is_active = False
+        self.contact_info.is_active = False
+        self.contact_info.save()
+        self.save()
+

@@ -23,3 +23,9 @@ class RetailNetwork(models.Model):
     class Meta:
         verbose_name = 'Retail Network'
         verbose_name_plural = 'Retail Networks'
+
+    def delete(self, *args, **kwargs):
+        self.is_active = False
+        self.contact_info.is_active = False
+        self.contact_info.save()
+        self.save()

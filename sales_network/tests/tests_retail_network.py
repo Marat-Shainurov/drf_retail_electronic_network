@@ -121,11 +121,12 @@ class RetailNetTestCase(APITestCase):
         self.assertEqual(updated_retail_network.name, data_to_update['name'])
 
     def test_delete_retail_network(self):
-        stored_network = RetailNetwork.objects.all()
-        self.assertEqual(stored_network.count(), 1)
-        self.assertEqual(stored_network.first(), self.test_retail_network)
+        stored_retail_net = RetailNetwork.objects.get(pk=self.test_retail_network.pk)
+        self.assertEqual(stored_retail_net.is_active, True)
 
         response_delete = self.client.delete(
             f"http://localhost:8000/retail-networks/delete/{self.test_retail_network.pk}/")
         self.assertEqual(response_delete.status_code, status.HTTP_204_NO_CONTENT)
-        self.assertEqual(RetailNetwork.objects.all().count(), 0)
+        deleted_retail_net = RetailNetwork.objects.get(pk=self.test_retail_network.pk)
+        self.assertEqual(deleted_retail_net.is_active, False)
+        self.assertEqual(deleted_retail_net.contact_info.is_active, False)

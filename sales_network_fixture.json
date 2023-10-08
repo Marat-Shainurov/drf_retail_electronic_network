@@ -1534,6 +1534,45 @@
     }
   },
   {
+    "model": "admin.logentry",
+    "pk": 119,
+    "fields": {
+      "action_time": "2023-10-08T12:51:25.276Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "10",
+      "object_repr": "rn",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 120,
+    "fields": {
+      "action_time": "2023-10-08T12:51:25.281Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "7",
+      "object_repr": "new prod",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 121,
+    "fields": {
+      "action_time": "2023-10-08T12:51:25.282Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "6",
+      "object_repr": "postman",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
     "model": "auth.permission",
     "pk": 1,
     "fields": {
@@ -2078,6 +2117,14 @@
     }
   },
   {
+    "model": "sessions.session",
+    "pk": "pn6cmkzff4ukqpuqxfq6i3umzuenp7pi",
+    "fields": {
+      "session_data": ".eJxVjEEOwiAQRe_C2hCZAgWX7nsGMgyDVA0kpV0Z765NutDtf-_9lwi4rSVsnZcwJ3ERSpx-t4j04LqDdMd6a5JaXZc5yl2RB-1yaomf18P9OyjYy7e2ZwWJiSBHO9oMmZVRzuuoTRyj16wGyC5lBELCwZFl75wHo5PNZiDx_gDxMDhD:1qpTF5:fJDHjsJl4kLH7tQdPGZC2cbFHKSKnpxjx-3dNvTj2xQ",
+      "expire_date": "2023-10-22T12:50:43.517Z"
+    }
+  },
+  {
     "model": "sales_network.contactinfo",
     "pk": 1,
     "fields": {
@@ -2299,9 +2346,7 @@
         1,
         2,
         3,
-        4,
-        6,
-        7
+        4
       ]
     }
   },
@@ -2473,41 +2518,11 @@
     }
   },
   {
-    "model": "products.product",
-    "pk": 6,
-    "fields": {
-      "name": "postman",
-      "product_model": "postman",
-      "launch_date": "2023-10-05",
-      "is_active": true
-    }
-  },
-  {
-    "model": "products.product",
-    "pk": 7,
-    "fields": {
-      "name": "new prod",
-      "product_model": "new model",
-      "launch_date": "2023-10-05",
-      "is_active": true
-    }
-  },
-  {
-    "model": "products.product",
-    "pk": 10,
-    "fields": {
-      "name": "rn",
-      "product_model": "rn model",
-      "launch_date": "2023-10-05",
-      "is_active": true
-    }
-  },
-  {
     "model": "users.customuser",
     "pk": 1,
     "fields": {
       "password": "pbkdf2_sha256$600000$V30tFfjOh3M5y1pvi53lV8$qJLC0hQ6pomvlYOIcne191zE1IyCV9Xr/C7/VQa/O4E=",
-      "last_login": "2023-10-06T14:07:45.693Z",
+      "last_login": "2023-10-08T12:50:43.512Z",
       "is_superuser": true,
       "first_name": "",
       "last_name": "",

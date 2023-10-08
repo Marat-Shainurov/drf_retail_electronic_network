@@ -37,3 +37,9 @@ class SoleProprietor(models.Model):
     def save(self, *args, **kwargs):
         self.clean()
         super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        self.is_active = False
+        self.contact_info.is_active = False
+        self.contact_info.save()
+        self.save()

@@ -18,3 +18,9 @@ class Factory(models.Model):
     class Meta:
         verbose_name = 'Factory'
         verbose_name_plural = 'Factories'
+
+    def delete(self, *args, **kwargs):
+        self.is_active = False
+        self.contact_info.is_active = False
+        self.contact_info.save()
+        self.save()

@@ -100,10 +100,11 @@ class FactoryTestCase(APITestCase):
         self.assertEqual(updated_factory.name, data_to_update['name'])
 
     def test_delete_factory(self):
-        stored_factory = Factory.objects.all()
-        self.assertEqual(stored_factory.count(), 1)
-        self.assertEqual(stored_factory.first(), self.test_factory)
+        stored_factory = Factory.objects.get(pk=self.test_factory.pk)
+        self.assertEqual(stored_factory.is_active, True)
 
         response_delete = self.client.delete(f"http://localhost:8000/factories/delete/{self.test_factory.pk}/")
         self.assertEqual(response_delete.status_code, status.HTTP_204_NO_CONTENT)
-        self.assertEqual(Factory.objects.all().count(), 0)
+        deleted_factory = Factory.objects.get(pk=self.test_factory.pk)
+        self.assertEqual(deleted_factory.is_active, False)
+        self.assertEqual(deleted_factory.contact_info.is_active, False)

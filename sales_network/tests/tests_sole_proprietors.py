@@ -138,11 +138,12 @@ class SoleProprietorNetTestCase(APITestCase):
         self.assertEqual(updated_sole_proprietor.name, data_to_update['name'])
 
     def test_delete_sole_proprietor(self):
-        stored_sole_proprietor = SoleProprietor.objects.all()
-        self.assertEqual(stored_sole_proprietor.count(), 1)
-        self.assertEqual(stored_sole_proprietor.first(), self.test_sole_proprietor)
+        stored_sole_proprietor = SoleProprietor.objects.get(pk=self.test_sole_proprietor.pk)
+        self.assertEqual(stored_sole_proprietor.is_active, True)
 
         response_delete = self.client.delete(
             f"http://localhost:8000/sole-proprietors/delete/{self.test_sole_proprietor.pk}/")
         self.assertEqual(response_delete.status_code, status.HTTP_204_NO_CONTENT)
-        self.assertEqual(SoleProprietor.objects.all().count(), 0)
+        deleted_sole_proprietor = SoleProprietor.objects.get(pk=self.test_sole_proprietor.pk)
+        self.assertEqual(deleted_sole_proprietor.is_active, False)
+        self.assertEqual(deleted_sole_proprietor.contact_info.is_active, False)

@@ -5,11 +5,19 @@ from sales_network.views import (FactoryListAPIView, FactoryCreateAPIView, Facto
                                  FactoryDeleteAPIView, RetailNetCreateAPIView, RetailNetListAPIView,
                                  RetailNetRetrieveAPIView, RetailNetDeleteAPIView, RetailNetUpdateAPIView,
                                  SoleProprietorCreateView, SoleProprietorListView, SoleProprietorUpdateView,
-                                 SoleProprietorRetrieveView, SoleProprietorDeleteView)
+                                 SoleProprietorRetrieveView, SoleProprietorDeleteView, MainNetCreateAPIView,
+                                 MainNetListView, MainNetUpdateAPIView, MainNetRetrieveAPIView, MainNetDeleteAPIView)
 
 app_name = SalesNetworkConfig.name
 
 urlpatterns = [
+    # main networks
+    path("main-networks/", MainNetListView.as_view(), name='list_main_networks'),
+    path("main-networks/create/", MainNetCreateAPIView.as_view(), name='create_main_networks'),
+    path("main-networks/update/<int:pk>/", MainNetUpdateAPIView.as_view(), name='update_main_networks'),
+    path("main-networks/get/<int:pk>/", MainNetRetrieveAPIView.as_view(), name='get_main_networks'),
+    path("main-networks/delete/<int:pk>/", MainNetDeleteAPIView.as_view(), name='delete_main_networks'),
+
     # factories
     path("factories/", FactoryListAPIView.as_view(), name='list_factories'),
     path("factories/create/", FactoryCreateAPIView.as_view(), name='create_factory'),

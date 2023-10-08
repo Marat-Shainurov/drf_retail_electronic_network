@@ -4,17 +4,23 @@ from django.shortcuts import get_object_or_404
 from rest_framework import serializers
 
 from products.models import Product
-from products.serializers import ProductCreateSerializer
+from products.serializers import ProductCreateSerializer, ProductBaseSerializer
 from sales_network.models import SoleProprietor, ContactInfo
 from sales_network.serializers import (ContactInfoBaseSerializer, FactorySupplierSerializer,
                                        RetailNetSupplierSerializer, MainNetworkBaseSerializer)
 
 
 class SoleProprietorSerializer(serializers.ModelSerializer):
+    """
+    SoleProprietor's model base serializer, with a broader info of the related objects
+    (main_network, contact_info, factory_supplier, retail_network_supplier, products).
+    """
     contact_info = ContactInfoBaseSerializer(read_only=True)
     factory_supplier = FactorySupplierSerializer(read_only=True)
     retail_network_supplier = RetailNetSupplierSerializer(read_only=True)
     main_network = MainNetworkBaseSerializer(read_only=True)
+    products = ProductBaseSerializer(many=True, read_only=True)
+
 
     class Meta:
         model = SoleProprietor
@@ -23,6 +29,11 @@ class SoleProprietorSerializer(serializers.ModelSerializer):
 
 
 class SoleProprietorCreateSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the SoleProprietor model objects creation.
+    transaction.atomic() context is used in order to prevent any effects to the database,
+    unless all the actions in the overridden create() method are successful.
+    """
     contact_info = ContactInfoBaseSerializer(many=False, required=True)
     new_products = ProductCreateSerializer(many=True, required=False)
     product_ids_to_add = serializers.ListSerializer(child=serializers.IntegerField(), required=False)
@@ -56,6 +67,11 @@ class SoleProprietorCreateSerializer(serializers.ModelSerializer):
 
 
 class SoleProprietorUpdateSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the SoleProprietor model objects update.
+    transaction.atomic() context is used in order to prevent any effects to the database,
+    unless all the actions in the overridden updated() method are successful.
+    """
     name = serializers.CharField(required=False)
     contact_info_id = serializers.IntegerField(required=False)
     product_ids_to_add = serializers.ListSerializer(child=serializers.IntegerField(), required=False)

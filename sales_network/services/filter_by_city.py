@@ -4,6 +4,11 @@ from sales_network.models import ContactInfo
 
 
 class ContactInfoCityFilter(admin.SimpleListFilter):
+    """
+    Custom filter class for the admin interface.
+    Filters objects by their contact_info__city,
+    based on the One-To-One relation with the ContactInfo model.
+    """
     title = 'City'
     parameter_name = 'contact_info__city'
 

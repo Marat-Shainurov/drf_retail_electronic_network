@@ -11,6 +11,9 @@ from sales_network.serializers import ContactInfoBaseSerializer, MainNetworkBase
 
 
 class FactorySerializer(serializers.ModelSerializer):
+    """
+    Base Factory model serializer, with a broader info of the related objects (main_network, contact_info, products).
+    """
     main_network = MainNetworkBaseSerializer(read_only=True)
     contact_info = ContactInfoBaseSerializer(read_only=True)
     products = ProductBaseSerializer(many=True, read_only=True)
@@ -21,12 +24,20 @@ class FactorySerializer(serializers.ModelSerializer):
 
 
 class FactorySupplierSerializer(serializers.ModelSerializer):
+    """
+    A serializers for broader short supplier representation (id + name) used in related models' serializers.
+    """
     class Meta:
         model = Factory
         fields = ('id', 'name',)
 
 
 class FactoryCreateSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the Factory model objects creation.
+    transaction.atomic() context is used in order to prevent any effects to the database,
+    unless all the actions in the overridden create() method are successful.
+    """
     contact_info = ContactInfoBaseSerializer(many=False, required=True)
     new_products = ProductCreateSerializer(many=True, required=False)
     product_ids_to_add = serializers.ListField(required=False)
@@ -59,6 +70,11 @@ class FactoryCreateSerializer(serializers.ModelSerializer):
 
 
 class FactoryUpdateSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the Factory model objects update.
+    transaction.atomic() context is used in order to prevent any effects to the database,
+    unless all the actions in the overridden updated() method are successful.
+    """
     name = serializers.CharField(required=False)
     contact_info_id = serializers.IntegerField(required=False)
     product_ids_to_add = serializers.ListField(child=serializers.IntegerField(), required=False)

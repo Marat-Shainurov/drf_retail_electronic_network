@@ -6,7 +6,7 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 
 from products.models import Product
-from sales_network.models import ContactInfo, MainNetwork, Factory
+from sales_network.models import ContactInfo, MainNetwork
 from users.models import CustomUser
 
 

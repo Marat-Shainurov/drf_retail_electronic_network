@@ -23,4 +23,3 @@ class MainNetwork(models.Model):
         self.contact_info.is_active = False
         self.contact_info.save()
         self.save()
-

@@ -21,7 +21,6 @@ class SoleProprietorSerializer(serializers.ModelSerializer):
     main_network = MainNetworkBaseSerializer(read_only=True)
     products = ProductBaseSerializer(many=True, read_only=True)
 
-
     class Meta:
         model = SoleProprietor
         fields = ('id', 'main_network', 'name', 'contact_info', 'products', 'factory_supplier',

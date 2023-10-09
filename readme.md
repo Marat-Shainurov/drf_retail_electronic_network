@@ -1,5 +1,5 @@
 # Описание проекта drf_retail_electronics
-drf_retail_electronics это django-rest-framework проект.
+drf_retail_electronics это django-rest-framework проект. \
 Данное серверное приложение создано для работы с базой данных по созданию, управлению сетью по продажам электроники.
 
 
@@ -36,23 +36,23 @@ drf_retail_electronics это django-rest-framework проект.
 
 2. *sales_network* - приложение для работы с сущностями сети.
    - *ContactInfo* - модель контакты и адрес. 
-   - *MainNetwork* - модель основной сети (вершина иерархии сети). 
+   - *MainNetwork* - модель основной сети (вершина иерархии сети).\
      Остальные звенья сети связаны с моделью по ForeignKey.
    - *Factory* - модель завода. 
-     'Нулевая' модель, с т.з. закупок (у завода могут закупать товар объекты более низкх по иерархии моделей).
-     Обязательно имеет основную сеть (MainNetwork по FK).
-     Связана с Product (ManyToMany)
-     Связана с ContactInfo (OneToOne)
+     'Нулевая' модель, с т.з. закупок (у завода могут закупать товар объекты более низкх по иерархии моделей).\
+     Обязательно имеет основную сеть (MainNetwork по FK).\
+     Связана с Product (ManyToMany)\
+     Связана с ContactInfo (OneToOne)\
    - *RetailNetwork* - модель розничная сеть.
-     Обязательно имеет основную сеть (MainNetwork по FK).
-     Связана с Product (ManyToMany)
-     Связана с ContactInfo (OneToOne)
-     Может иметь завод-поставщик (связь по FK c Factory)
+     Обязательно имеет основную сеть (MainNetwork по FK).\
+     Связана с Product (ManyToMany)\
+     Связана с ContactInfo (OneToOne)\
+     Может иметь завод-поставщик (связь по FK c Factory)\
    - *SoleProprietor* - модель индивидуальный предприниматель.
-     Обязательно имеет основную сеть (MainNetwork по FK).
-     Связана с Product (ManyToMany)
-     Связана с ContactInfo (OneToOne)
-     Может иметь поставщика либо завод, либо розничную суть (связь по FK). Валидация на уровне модели (clean()).
+     Обязательно имеет основную сеть (MainNetwork по FK).\
+     Связана с Product (ManyToMany)\
+     Связана с ContactInfo (OneToOne)\
+     Может иметь поставщика либо завод, либо розничную суть (связь по FK). Валидация на уровне модели (clean()).\
 
 3. users.
    - CustomUser - кастомная модель пользователей.
@@ -70,16 +70,16 @@ drf_retail_electronics это django-rest-framework проект.
 
 
 # Тестирование
-- Все endpoints проекта покрыты тестами.
+- Все endpoints проекта покрыты тестами.\
   Тесты описаны в модулях <app_name>/test.py. Total coverage - 91%.
 - Проведена проверка синтаксиса и соблюдения PEP с помощью flake8.
 
 
 # Эндпоинты и документация
-Настроена документация yasg-drf.
-Все endpoints можно изучить по ссылкам:
-- http://localhost:8000/docs/
-- http://localhost:8000/redoc/
+- Настроена документация yasg-drf.
+- Все endpoints можно изучить по ссылкам:
+  http://localhost:8000/docs/ \
+  http://localhost:8000/redoc/
 
 # Безопасность
 - Для проекта настроен CORS.

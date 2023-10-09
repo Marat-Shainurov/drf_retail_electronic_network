@@ -13,7 +13,7 @@ class SoleProprietor(models.Model):
     contact_info = models.OneToOneField(ContactInfo, on_delete=models.CASCADE, related_name='proprietor_contacts')
     products = models.ManyToManyField(Product, related_name='proprietor_products', blank=True)
     factory_supplier = models.ForeignKey(Factory, on_delete=models.SET_NULL,
-                                         verbose_name='factory_supplier_for_proprietor',
+                                         verbose_name='factory_supplier',
                                          related_name='factory_supplier_for_proprietor', **NULLABLE)
     retail_network_supplier = models.ForeignKey(RetailNetwork, on_delete=models.SET_NULL,
                                                 verbose_name='retail_network_supplier',

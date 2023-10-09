@@ -2,7 +2,7 @@ version: "3"
 
 services:
 
-  db:
+  db_sales_networks:
     image: postgres:14-alpine
     container_name: db_sales_network_container
     environment:
@@ -10,7 +10,7 @@ services:
       POSTGRES_DB: sales_network
       POSTGRES_PASSWORD: sales_network_password
     volumes:
-      - postgres_data_sales_network:/var/lib/postgresql/pgdata
+      - postgres_data:/var/lib/postgresql/pgdata
     ports:
       - '5432:5432'
     healthcheck:
@@ -19,17 +19,17 @@ services:
       timeout: 5s
       retries: 5
 
-  app:
+  app_sales_networks:
     build: .
     container_name: app_sales_network_container
     command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     ports:
       - '8000:8000'
     depends_on:
-      db:
+      db_sales_networks:
         condition: service_healthy
     volumes:
       - ./.env:/app/.env
 
 volumes:
-  postgres_data_sales_network:
+  postgres_data:

@@ -1,7 +1,3 @@
-# todo: install and flake8
-# todo: add a new fixture
-
-
 from rest_framework import status
 from rest_framework.test import APITestCase
 

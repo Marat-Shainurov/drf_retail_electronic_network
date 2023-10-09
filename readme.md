@@ -42,17 +42,17 @@ drf_retail_electronics это django-rest-framework проект. \
      'Нулевая' модель, с т.з. закупок (у завода могут закупать товар объекты более низкх по иерархии моделей).\
      Обязательно имеет основную сеть (MainNetwork по FK).\
      Связана с Product (ManyToMany)\
-     Связана с ContactInfo (OneToOne)\
+     Связана с ContactInfo (OneToOne)
    - *RetailNetwork* - модель розничная сеть.
      Обязательно имеет основную сеть (MainNetwork по FK).\
      Связана с Product (ManyToMany)\
      Связана с ContactInfo (OneToOne)\
-     Может иметь завод-поставщик (связь по FK c Factory)\
+     Может иметь завод-поставщик (связь по FK c Factory)
    - *SoleProprietor* - модель индивидуальный предприниматель.
      Обязательно имеет основную сеть (MainNetwork по FK).\
      Связана с Product (ManyToMany)\
      Связана с ContactInfo (OneToOne)\
-     Может иметь поставщика либо завод, либо розничную суть (связь по FK). Валидация на уровне модели (clean()).\
+     Может иметь поставщика либо завод, либо розничную суть (связь по FK). Валидация на уровне модели (clean()).
 
 3. users.
    - CustomUser - кастомная модель пользователей.
@@ -77,7 +77,7 @@ drf_retail_electronics это django-rest-framework проект. \
 
 # Эндпоинты и документация
 - Настроена документация yasg-drf.
-- Все endpoints можно изучить по ссылкам:
+- Все endpoints можно изучить по ссылкам: \
   http://localhost:8000/docs/ \
   http://localhost:8000/redoc/
 

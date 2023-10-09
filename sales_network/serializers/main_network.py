@@ -41,7 +41,7 @@ class MainNetworkCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MainNetwork
-        fields = ('name', 'contact_info', 'new_products', 'product_ids_to_add',)
+        fields = ('id', 'name', 'contact_info', 'new_products', 'product_ids_to_add',)
 
     def create(self, validated_data):
         with transaction.atomic():
@@ -80,7 +80,7 @@ class MainNetworkUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = MainNetwork
         fields = (
-            'name', 'contact_info_id', 'product_ids_to_add', 'product_ids_to_remove', 'is_active',
+            'id', 'name', 'contact_info_id', 'product_ids_to_add', 'product_ids_to_remove', 'is_active',
         )
 
     def update(self, main_network, validated_data):

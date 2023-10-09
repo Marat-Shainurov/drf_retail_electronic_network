@@ -7,7 +7,8 @@ NULLABLE = {'blank': True, 'null': True}
 
 
 class RetailNetwork(models.Model):
-    main_network = models.ForeignKey(MainNetwork, verbose_name='main_network', on_delete=models.CASCADE)
+    main_network = models.ForeignKey(
+        MainNetwork, verbose_name='main_network', related_name='main_network_retail_net', on_delete=models.CASCADE)
     name = models.CharField(max_length=100, unique=True, verbose_name='network_name')
     contact_info = models.OneToOneField(ContactInfo, on_delete=models.CASCADE, related_name='network_contacts')
     products = models.ManyToManyField(Product, related_name='network_products', blank=True)

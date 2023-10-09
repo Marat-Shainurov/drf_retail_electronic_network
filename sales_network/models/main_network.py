@@ -7,7 +7,7 @@ from sales_network.models import ContactInfo
 class MainNetwork(models.Model):
     name = models.CharField(max_length=100, verbose_name='name', unique=True)
     contact_info = models.OneToOneField(ContactInfo, on_delete=models.CASCADE, related_name='main_network_contacts')
-    products = models.ManyToManyField(Product, verbose_name='main_network_products', blank=True)
+    products = models.ManyToManyField(Product, related_name='main_networks_products', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
 

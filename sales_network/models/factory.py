@@ -5,7 +5,8 @@ from sales_network.models import ContactInfo, MainNetwork
 
 
 class Factory(models.Model):
-    main_network = models.ForeignKey(MainNetwork, verbose_name='main_network', on_delete=models.CASCADE)
+    main_network = models.ForeignKey(
+        MainNetwork, verbose_name='main_network', related_name='main_network_factory', on_delete=models.CASCADE)
     name = models.CharField(max_length=100, unique=True, verbose_name='factory_name')
     contact_info = models.OneToOneField(ContactInfo, on_delete=models.CASCADE, related_name='factory_contacts')
     products = models.ManyToManyField(Product, related_name='factory_products', blank=True)

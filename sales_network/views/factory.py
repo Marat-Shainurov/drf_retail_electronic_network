@@ -13,7 +13,7 @@ class FactoryCreateAPIView(generics.CreateAPIView):
 
 class FactoryListAPIView(generics.ListAPIView):
     serializer_class = FactorySerializer
-    queryset = Factory.objects.all()
+    queryset = Factory.objects.filter(is_active=True)
     permission_classes = [IsUserActive]
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['contact_info__city', ]

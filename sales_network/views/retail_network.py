@@ -14,7 +14,7 @@ class RetailNetCreateAPIView(generics.CreateAPIView):
 
 class RetailNetListAPIView(generics.ListAPIView):
     serializer_class = RetailNetSerializer
-    queryset = RetailNetwork.objects.all()
+    queryset = RetailNetwork.objects.filter(is_active=True)
     permission_classes = [IsUserActive]
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['contact_info__city', ]

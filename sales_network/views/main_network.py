@@ -15,7 +15,7 @@ class MainNetCreateAPIView(generics.CreateAPIView):
 
 class MainNetListView(generics.ListAPIView):
     serializer_class = MainNetworkSerializer
-    queryset = MainNetwork.objects.all()
+    queryset = MainNetwork.objects.filter(is_active=True)
     permission_classes = [IsUserActive]
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['contact_info__city', ]

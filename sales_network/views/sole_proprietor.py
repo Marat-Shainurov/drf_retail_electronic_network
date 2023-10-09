@@ -15,7 +15,7 @@ class SoleProprietorCreateView(generics.CreateAPIView):
 
 class SoleProprietorListView(generics.ListAPIView):
     serializer_class = SoleProprietorSerializer
-    queryset = SoleProprietor.objects.all()
+    queryset = SoleProprietor.objects.filter(is_active=True)
     permission_classes = [IsUserActive]
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['contact_info__city', ]

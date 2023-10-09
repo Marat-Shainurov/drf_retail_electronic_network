@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework import serializers
 
 from products.models import Product
-from products.serializers import ProductCreateSerializer
+from products.serializers import ProductCreateSerializer, ProductBaseSerializer
 from sales_network.models import MainNetwork, ContactInfo
 from sales_network.serializers import ContactInfoBaseSerializer
 
@@ -23,6 +23,8 @@ class MainNetworkSerializer(serializers.ModelSerializer):
     """
     Full MainNetwork serializer used in MainNetwork list/retrieve/delete views.
     """
+    contact_info = ContactInfoBaseSerializer(read_only=True)
+    products = ProductBaseSerializer(many=True, read_only=True)
 
     class Meta:
         model = MainNetwork

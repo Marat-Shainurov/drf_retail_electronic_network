@@ -49,10 +49,10 @@ You can load the fixture with several testing objects:
      Connected with the ContactInfo model (OneToOne relation)
      May have either a factory-supplier or a retail-network-supplier. Validated on the model level (clean method)
 
-3. users.
-   - CustomUser.
-   - UersManager class is overridden and customised (./users/manager.py)
-   - Admin interface is overridden and customised. (./users/admin.py)
+3. *users* - users app.
+   - CustomUser - customized User model.
+   - UersManager class is overridden and customized (./users/manager.py)
+   - Admin interface is overridden and customized. (./users/admin.py)
 
 # Testing
 -All the endpoints are covered by pytest tests in /tests/test_main.py \

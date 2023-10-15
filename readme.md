@@ -13,7 +13,7 @@ The project is created for work with a database for creating and managing electr
    - http://127.0.0.1:8000/docs/
    - http://127.0.0.1:8000/redoc/
 
-4. Go to the main page on your browser http://127.0.0.1:8000/docs and start working with the app's endpoints.
+4. Go to the main page on your browser http://127.0.0.1:8000/ and start working with the app's endpoints.
 
 
 # Testing fixture

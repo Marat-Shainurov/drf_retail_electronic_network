@@ -1,6 +1,7 @@
 # General description
 drf_retail_electronics is a django-rest-framework project. \
 The project is created for work with a database for creating and managing electronics sales networks.
+Main stack: Djangorestframework, Postgresql, unittest.
 
 # Install and usage
 1. Clone the project from https://github.com/Marat-Shainurov/drf_retail_electronics to your local machine.
